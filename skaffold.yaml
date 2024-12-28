@@ -1,0 +1,23 @@
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata:
+  name: crossplane-and-provider
+
+deploy:
+  helm:
+    releases:
+      - name: crossplane
+        remoteChart: crossplane-stable/crossplane
+        namespace: crossplane-system
+        createNamespace: true
+        version: 1.18.2
+    
+    hooks:
+      before:
+        - host:
+            command: ["sh", "-c", "helm repo add crossplane-stable https://charts.crossplane.io/stable && helm repo update || helm repo update"]
+        - host:
+            command: ["sh", "-c", "./get-crds.sh"]
+      after:
+        - host:
+            command: ["sh", "-c", "./install-providers.sh"]
