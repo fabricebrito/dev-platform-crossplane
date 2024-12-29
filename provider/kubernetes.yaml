@@ -1,30 +1,30 @@
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
 metadata:
-  name: provider-helm
+  name: provider-kubernetes
 spec:
-  package: xpkg.upbound.io/crossplane-contrib/provider-helm:v0.19.0
+  package: xpkg.upbound.io/upbound/provider-kubernetes:v0.16.0
   runtimeConfigRef:
     apiVersion: pkg.crossplane.io/v1beta1
     kind: DeploymentRuntimeConfig
-    name: provider-helm
+    name: provider-kubernetes
 ---
 apiVersion: pkg.crossplane.io/v1beta1
 kind: DeploymentRuntimeConfig
 metadata:
-  name: provider-helm
+  name: provider-kubernetes
 spec:
   serviceAccountTemplate:
     metadata:
-      name: provider-helm
+      name: provider-kubernetes
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: provider-helm-cluster-admin
+  name: provider-kubernetes-cluster-admin
 subjects:
   - kind: ServiceAccount
-    name: provider-helm
+    name: provider-kubernetes
     namespace: crossplane-system
 roleRef:
   kind: ClusterRole

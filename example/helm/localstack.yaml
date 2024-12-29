@@ -10,8 +10,11 @@ spec:
       version: "0.6.20"
       repository: https://localstack.github.io/helm-charts
     namespace: localstack
+    skipCreateNamespace: false
     values:
       service:
         type: ClusterIP
+      serviceAccount:
+        create: true
   providerConfigRef:
     name: helm-provider
