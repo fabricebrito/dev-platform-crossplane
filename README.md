@@ -7,7 +7,7 @@ helm repo add crossplane-stable https://charts.crossplane.io/stable
 ```
 
 ```
-helm repo udpate
+helm repo update
 ````
 
 ```
